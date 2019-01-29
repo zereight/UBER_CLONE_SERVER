@@ -1,0 +1,30 @@
+{
+  "name": "uber-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zereight/uber-server.git",
+  "author": "zereight <42544600+zereight@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "graphql-tools": "^4.0.4",
+    "graphql-yoga": "^1.17.1",
+    "helmet": "^3.15.0",
+    "merge-graphql-schemas": "^1.5.8",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.4",
+    "@types/helmet": "^0.0.42",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^10.12.18",
+    "nodemon": "^1.18.9",
+    "ts-node": "^8.0.2",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.4"
+  },
+  "scripts": {
+    "dev": "cd src && nodemon --exec ts-node index.ts -e ts, graphql"
+  }
+}
