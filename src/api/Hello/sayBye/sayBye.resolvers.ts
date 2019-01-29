@@ -1,6 +1,13 @@
+import { Greeting } from "../../../types";
+
 const resovlers = {
     Query : {
-        sayBye: (): string => {return "say Bye"}
+        sayBye: (): Greeting => {
+            return {
+                text: "Say Bye",
+                error: false
+            }
+        }
     }
 };
 
