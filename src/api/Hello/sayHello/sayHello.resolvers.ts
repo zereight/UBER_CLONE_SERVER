@@ -1,6 +1,10 @@
+import { SayHelloQueryArgs } from "../../../types";
+
 const resovlers = {
     Query : {
-        sayHello: (): string => {return "say Hello"}
+        sayHello: (_parent : any, args : SayHelloQueryArgs, _context : any) : string => {
+            return `say hello ${args.name}`
+        }
     }
 };
 

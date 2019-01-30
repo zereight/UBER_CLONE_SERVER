@@ -5,5 +5,5 @@ type Greeting {
 
 type Query {
   sayBye: Greeting!
-  sayHello: String!
+  sayHello(name: String!): String!
 }
