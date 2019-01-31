@@ -6,10 +6,10 @@ const cO : ConnectionOptions = {
     logging: true,
     entities: ["entities/**/*.*"],
     type: "postgres",
-    host: process.env.DB_ENDPOINT || "localhost",
+    host: process.env.DB_ENDPOINT,
     port: 5433,
-    username: process.env.DB_USERNAME || "postgres",
-    password: process.env.DB_PASSWORD || "1234"
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD
 };
 
 export default cO;
