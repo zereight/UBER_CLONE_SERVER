@@ -6,6 +6,7 @@
   "author": "zereight <42544600+zereight@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
+    "class-validator": "^0.9.1",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "graphql-tools": "^4.0.4",
