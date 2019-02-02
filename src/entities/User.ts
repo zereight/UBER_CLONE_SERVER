@@ -1,6 +1,6 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate } from "typeorm";
 import { IsEmail } from "class-validator";
-import { hashSync,genSaltSync } from "bcrypt-nodejs";
+import { hashSync,genSaltSync,compareSync } from "bcrypt-nodejs";
 
 @Entity()
 class User extends BaseEntity {
@@ -71,8 +71,13 @@ class User extends BaseEntity {
     @BeforeUpdate() //객체를 update하기 전에 불려지는 메소스다.
     async savePassword() : Promise<void> { //async 함수는 반드시 Promise<>형을 반환
         if(this.password){
+            //비동기 함수이안의 다른 함수들은 await로 기다리게 만들어주자. 안그러면 함수가 끝나기도 전에 비동기함수가 끝나버려서 에러뜰 수도 있음.
             this.password = await hashSync(this.password, genSaltSync(10));
         }
+    }
+
+    public compare_PW( pw : string ) : boolean {
+        return compareSync(pw, this.password);
     }
 
 };
