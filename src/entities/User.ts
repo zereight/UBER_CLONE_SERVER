@@ -1,5 +1,6 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate } from "typeorm";
 import { IsEmail } from "class-validator";
+import { hashSync,genSaltSync } from "bcrypt-nodejs";
 
 @Entity()
 class User extends BaseEntity {
@@ -65,6 +66,15 @@ class User extends BaseEntity {
 
     @UpdateDateColumn()
     updatedAt: string;
+
+    @BeforeInsert() //새 객체를 만들기 전에 불려지는 메소드다.
+    @BeforeUpdate() //객체를 update하기 전에 불려지는 메소스다.
+    async savePassword() : Promise<void> { //async 함수는 반드시 Promise<>형을 반환
+        if(this.password){
+            this.password = await hashSync(this.password, genSaltSync(10));
+        }
+    }
+
 };
 
 export default User;

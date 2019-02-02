@@ -1,9 +1,26 @@
-type Greeting {
-  text: String!
-  error: Boolean!
+type User {
+  id: Int!
+  email: String
+  verifiedEmail: Boolean!
+  firstName: String!
+  lastName: String!
+  age: Int
+  password: String
+  phoneNumber: String
+  verifiedPhonenumber: Boolean!
+  profilePhoto: String
+  fullName: String
+  isDriving: Boolean!
+  isRiding: Boolean!
+  isTaken: Boolean!
+  lastLng: Float
+  lastLat: Float
+  lastOrientation: Float
+  createdAt: String!
+  updatedAt: String
 }
 
+# Query가 없으면 DB에서 요청을 못받아용
 type Query {
-  sayBye: Greeting!
-  sayHello(name: String!): String!
+  user: User
 }
