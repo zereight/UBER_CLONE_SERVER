@@ -1,4 +1,4 @@
-import { BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert } from 'typeorm';
 
 type verificationTarget = "PHONE" | "EMAIL"; //Verification에서만 쓸 사용자 정의 타입.
 
@@ -24,6 +24,18 @@ class Verification extends BaseEntity{
 
     @UpdateDateColumn()
     updateAt: string;
+
+    @BeforeInsert() //객체생성바로 전에 실행
+    createKey():void { //this.key에 정보만 주고 사라지는 함수므로 딱히 Verification.graphql에 저장해줄 필요는 없음.
+        if (this.target === "PHONE"){
+            //짧은 키
+            this.key = Math.floor( Math.random() * 100000 ).toString()
+        }
+        else if (this.target === "EMAIL"){
+            //긴 키 python처럼 [:]문자열 슬라이싱 안됨 substr써야됨.
+            this.key = Math.random().toString(36).substring(2);
+        }
+    }
 
 }
 
