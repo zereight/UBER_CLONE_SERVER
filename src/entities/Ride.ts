@@ -1,4 +1,5 @@
-import { BaseEntity, Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import User from './User';
 
 type STATUS = 
     "ACCEPTED" |
@@ -42,6 +43,12 @@ class Ride extends BaseEntity{
 
     @Column({type: "text"})
     duration: string;
+
+    @ManyToOne(type => User, user => user.ridesAsPassenger)
+    passenger : User;
+
+    @ManyToOne(type => User, user => user.ridesAsDriver)
+    driver: User;
 
     @CreateDateColumn()
     createdAt: string;

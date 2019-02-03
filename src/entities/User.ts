@@ -1,6 +1,10 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate } from "typeorm";
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
 import { IsEmail } from "class-validator";
 import { hashSync,genSaltSync,compareSync } from "bcrypt-nodejs";
+import Chat from './Chat';
+import Message from './Message';
+import Verification from './Verification';
+import Ride from "./Ride";
 
 @Entity()
 class User extends BaseEntity {
@@ -47,6 +51,22 @@ class User extends BaseEntity {
 
     @Column({type:"boolean", default: false})
     isTaken:boolean;
+
+    @ManyToOne(type => Chat, chat => chat.participants)
+    chat: Chat;
+
+    @OneToMany( type => Message, message => message.user )
+    messages : Message[];
+
+    @OneToMany(type => Verification, verification => verification.user)
+    verification: Verification[];
+
+    @OneToMany(type => Ride, ride => ride.passenger)
+    ridesAsPassenger: Ride[];
+
+    @OneToMany(type => Ride, ride => ride.driver)
+    ridesAsDriver: Ride[];
+
 
     //graphql엔 type이 float인데 여긴 double precision인 이유:
     //float 타입에 버그가있어서.

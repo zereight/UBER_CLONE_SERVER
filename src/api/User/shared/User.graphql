@@ -7,6 +7,9 @@ type User {
     age: Int
     password: String
     phoneNumber: String
+    chat: Chat
+    messages: [Message]
+    verifications: [Verification]
     verifiedPhonenumber: Boolean!
     profilePhoto: String
     fullName:String
@@ -16,6 +19,8 @@ type User {
     lastLng:Float
     lastLat:Float
     lastOrientation:Float
+    ridesAsPassenger: [Ride]
+    ridesAsDriver: [RIde]
     createdAt: String!
     updatedAt: String
 }
