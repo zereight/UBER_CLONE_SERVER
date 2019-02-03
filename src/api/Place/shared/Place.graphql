@@ -1,4 +1,4 @@
-type Place{
+type Place {
     id : Int!
     name: String!
     lat: Float!
