@@ -1,9 +1,10 @@
-import { BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne } from 'typeorm';
+import { BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne, Entity } from 'typeorm';
 import User from './User';
 
 type verificationTarget = "PHONE" | "EMAIL"; //Verification에서만 쓸 사용자 정의 타입.
 
 //Verification은 phone이나 email등의 유효성을 검사할 것임.
+@Entity() // 이거 빠트렸었네 ;;
 class Verification extends BaseEntity{
 
     @PrimaryColumn() id : number;
@@ -20,7 +21,7 @@ class Verification extends BaseEntity{
     @Column({type:"boolean", default: false})
     used: boolean;
 
-    @ManyToOne(type => User, user => user.verification)
+    @ManyToOne(type => User, user => user.verifications)
     user: User;
 
     @CreateDateColumn()

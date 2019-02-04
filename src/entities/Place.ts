@@ -6,7 +6,7 @@ class Place extends BaseEntity {
     @PrimaryColumn() id : number;
 
     @Column({type: "text"})
-    ame: string;
+    name: string;
 
     @Column({type: "double precision", default: 0})
     lat: number;

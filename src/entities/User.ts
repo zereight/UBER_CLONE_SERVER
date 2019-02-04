@@ -38,11 +38,6 @@ class User extends BaseEntity {
     @Column({type:"text"})
     profilePhoto: string;
 
-    //fullName은 Column이 아니다. string을 반환하는 함수다. (class의 함수 처럼선언)
-    get fullName(): string {
-        return `${this.firstName} ${this.lastName}`;
-    }
-
     @Column({type:"boolean", default: false})
     isDriving:boolean;
 
@@ -51,22 +46,6 @@ class User extends BaseEntity {
 
     @Column({type:"boolean", default: false})
     isTaken:boolean;
-
-    @ManyToOne(type => Chat, chat => chat.participants)
-    chat: Chat;
-
-    @OneToMany( type => Message, message => message.user )
-    messages : Message[];
-
-    @OneToMany(type => Verification, verification => verification.user)
-    verification: Verification[];
-
-    @OneToMany(type => Ride, ride => ride.passenger)
-    ridesAsPassenger: Ride[];
-
-    @OneToMany(type => Ride, ride => ride.driver)
-    ridesAsDriver: Ride[];
-
 
     //graphql엔 type이 float인데 여긴 double precision인 이유:
     //float 타입에 버그가있어서.
@@ -80,12 +59,35 @@ class User extends BaseEntity {
     @Column({type:"double precision", default: 0})
     lastOrientation:number;
 
+    @Column({type: "text", nullable: true})
+    fbId: string;
+
+    @ManyToOne(type => Chat, chat => chat.participants)
+    chat: Chat;
+
+    @OneToMany( type => Message, message => message.user )
+    messages : Message[];
+
+    @OneToMany(type => Verification, verification => verification.user)
+    verifications: Verification[];
+
+    @OneToMany(type => Ride, ride => ride.passenger)
+    ridesAsPassenger: Ride[];
+
+    @OneToMany(type => Ride, ride => ride.driver)
+    ridesAsDriver: Ride[];
+
     //createdAt, updatedAt은 따로 Column이 있음.
     @CreateDateColumn()
     createdAt: string;
 
     @UpdateDateColumn()
     updatedAt: string;
+
+    //fullName은 Column이 아니다. string을 반환하는 함수다. (class의 함수 처럼선언)
+    get fullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
 
     @BeforeInsert() //새 객체를 만들기 전에 불려지는 메소드다.
     @BeforeUpdate() //객체를 update하기 전에 불려지는 메소스다.

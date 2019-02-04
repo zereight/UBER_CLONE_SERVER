@@ -19,12 +19,13 @@ type User {
     lastLng:Float
     lastLat:Float
     lastOrientation:Float
+    fbId: String
     ridesAsPassenger: [Ride]
-    ridesAsDriver: [RIde]
+    ridesAsDriver: [Ride]
     createdAt: String!
     updatedAt: String
 }
 #Query가 없으면 DB에서 요청을 못받아용
-type Query{ 
+type Query { 
     user:User
 }
