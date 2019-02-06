@@ -46,7 +46,7 @@ type Ride {
 
 type FacebookConnectResponse {
   ok: Boolean!
-  errpr: String
+  error: String
   token: String
 }
 

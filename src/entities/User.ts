@@ -12,7 +12,7 @@ class User extends BaseEntity {
 
     @Column({type: "text", unique:true}) // 가입할 email은 반드시 1개 unique해야하기 때문.
     @IsEmail() //class-validator에 있는 기능으로 email형식인지 validate하는 기능이다.
-    email: string;
+    email: string | null;
 
     @Column({type: "boolean", default: false})
     verifiedEmail: boolean;
@@ -23,13 +23,13 @@ class User extends BaseEntity {
     @Column({type:"text"})
     lastName: string;
 
-    @Column({type: "int"})
+    @Column({type: "int", nullable: true})
     age: number;
 
-    @Column({type:"text"})
+    @Column({type:"text", nullable: true})
     password: string;
 
-    @Column({type:"text"})
+    @Column({type:"text", nullable: true})
     phoneNumber: string;
 
     @Column({type:"boolean", default: false})
