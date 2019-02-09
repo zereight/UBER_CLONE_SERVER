@@ -1,0 +1,9 @@
+type StartPhoneVerificationResponse {
+    ok: Boolean!
+    error: String
+}
+
+#DB에 요청이 아니라 DB의 어떤 정보를 변화시키는 거면 Mutation이다!
+type Mutation {
+    StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+}

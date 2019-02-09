@@ -1,5 +1,4 @@
-import { BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne, Entity } from 'typeorm';
-import User from './User';
+import { BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert,  Entity } from 'typeorm';
 
 type verificationTarget = "PHONE" | "EMAIL"; //Verification에서만 쓸 사용자 정의 타입.
 
@@ -17,12 +16,6 @@ class Verification extends BaseEntity{
 
     @Column({type: "text"})
     key: string;
-
-    @Column({type:"boolean", default: false})
-    used: boolean;
-
-    @ManyToOne(type => User, user => user.verifications)
-    user: User;
 
     @CreateDateColumn()
     createAt: string;

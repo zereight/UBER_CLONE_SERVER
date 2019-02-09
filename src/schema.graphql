@@ -50,9 +50,11 @@ type EmailSignInResponse {
   token: String
 }
 
+# DB에 요청이 아니라 DB의 어떤 정보를 변화시키는 거면 Mutation이다!
 type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
+  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
 }
 
 type FacebookConnectResponse {
@@ -72,7 +74,6 @@ type User {
   phoneNumber: String
   chat: Chat
   messages: [Message]
-  verifications: [Verification]
   verifiedPhonenumber: Boolean!
   profilePhoto: String
   fullName: String
@@ -94,13 +95,16 @@ type Query {
   user: User
 }
 
+type StartPhoneVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
 type Verification {
   id: Int!
   target: String!
   payload: String!
   key: String!
-  used: Boolean!
-  user: User!
   createAt: String!
   updateAt: String
 }
