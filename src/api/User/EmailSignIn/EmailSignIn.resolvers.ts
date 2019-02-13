@@ -6,6 +6,7 @@ import {
     EmailSignInResponse
 } from '../../../types';
 import User from "../../../entities/User";
+import createJWT from '../../../utils/createJWT';
 
 
 const resolvers: Resolvers = {
@@ -28,11 +29,16 @@ const resolvers: Resolvers = {
                         };
                     };
 
-                    if ( await existingUser.compare_PW(password) ){
+                    const checkedPW= await existingUser.compare_PW(password);
+
+                    if ( checkedPW ){
+
+                        const token1 = createJWT(existingUser.id)
+
                         return {
                             ok: true,
                             error: null,
-                            token: "Coming soon."
+                            token: token1
                         }
                     } else {
                         return {
