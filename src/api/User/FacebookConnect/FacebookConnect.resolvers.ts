@@ -9,6 +9,14 @@ import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
 
 const resolvers: Resolvers = {
+
+    Query: {
+        user: (parent, args, context)=> {
+            console.log(context.req.request.user);
+            return "";
+        }
+    },
+
     Mutation: {
         FacebookConnect: async (
             _, args: FacebookConnectMutationArgs
