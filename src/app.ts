@@ -14,7 +14,7 @@ class App{
     constructor(){
         this.app = new GraphQLServer({
             schema,
-            context: req => { //Query의 인자중 parent, args, context중 context에 전달되는 인자로써 내가 해독한 user정보를 middleware에서 request에 담고 graphql-server에서 그걸 받아서 Query 인수로 제공하는 정보이다.
+            context: req => {
                 return {
                     req: req.request
                 };
@@ -33,7 +33,7 @@ class App{
 
     //왜 jwt는 jwt()로 안썼는가? => 그냥 함수명만 쓰게 되면 express.use() 가 실행된 후 실행되나 ()를 쓰면 그 자리에서 실행되고 express.use()가 실행된다.
 
-    private jwt = async (req, response: Response, next: NextFunction):Promise<void> => {
+    private jwt = async (req, res: Response, next: NextFunction):Promise<void> => {
         //request가 무엇을 갖고 있는지 확인하고
         //그에 대한 Response가 정의되어 있다면 그것을 전송하고
         //request가 아무것도 갖고 있지 않으면 next로 다음 미들웨어가 실행됨.
@@ -47,7 +47,7 @@ class App{
         //그 토큰을 입력 했을 때 그 토큰의 user정보가 콘솔창에 출력될거임.
         if(token){
             const user = await decodeJWT(token);
-            console.log(user);
+            
             if(user){
                 req.user = user; //request user라는 속성을 할당해주고 거기에 우리가 해독한 user를 대입 => request에 유저정보 실어서 graphql-server까지 운반
             } else {
