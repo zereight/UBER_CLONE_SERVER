@@ -12,6 +12,7 @@ const resolvers: Resolvers = {
 
     Query: {
         user: (parent, args, context)=> {
+            console.log("In Resolver");
             console.log(context.req.user);
             return "";
         }

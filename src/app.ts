@@ -15,6 +15,8 @@ class App{
         this.app = new GraphQLServer({
             schema,
             context: req => {
+                console.log("TEST")
+                console.log(req.request);
                 return {
                     req: req.request
                 };
@@ -47,9 +49,11 @@ class App{
         //그 토큰을 입력 했을 때 그 토큰의 user정보가 콘솔창에 출력될거임.
         if(token){
             const user = await decodeJWT(token);
-            
+
             if(user){
                 req.user = user; //request user라는 속성을 할당해주고 거기에 우리가 해독한 user를 대입 => request에 유저정보 실어서 graphql-server까지 운반
+                console.log("user is existing.")
+                console.log(req.user);
             } else {
                 req.user = undefined;
             }
