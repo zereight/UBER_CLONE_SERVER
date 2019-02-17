@@ -3,6 +3,7 @@ import { EmailSignUpMutationArgs } from 'src/types';
 import { EmailSignUpResponse } from '../../../types';
 import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
+import { transporter, mailOption } from '../../../utils/sendEmail';
 
 const resolvers: Resolvers= {
     Mutation: {
@@ -21,7 +22,15 @@ const resolvers: Resolvers= {
                     }
                 } else {
                     const user = await User.create({...args}).save();
-                    
+                    if(user.email){
+                        mailOption.to = user.email;
+                        mailOption.subject = "Please Verify this email.";
+                        mailOption.html = `<p>이 링크로 인증해주세요</p>`
+                    }
+                    await transporter.sendMail(mailOption,  (error,info): void => {
+                        if(error){ console.log(error); } else { console.log("Email is sent") }
+                        transporter.close();
+                    })
                     const token1 = createJWT(user.id)
 
                     return {
