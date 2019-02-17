@@ -77,6 +77,16 @@ type FacebookConnectResponse {
   token: String
 }
 
+type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  GetMyProfile: GetMyProfileResponse!
+}
+
 type User {
   id: Int!
   email: String
@@ -102,11 +112,6 @@ type User {
   ridesAsDriver: [Ride]
   createdAt: String!
   updatedAt: String
-}
-
-# Query가 없으면 DB에서 요청을 못받아용
-type Query {
-  user: User
 }
 
 type StartPhoneVerificationResponse {

@@ -8,15 +8,9 @@ import {
 import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
 
-const resolvers: Resolvers = {
+//email형식, fbid가 유효한지 체크하는 기능은 나중에 구현하자.
 
-    Query: {
-        user: (parent, args, context)=> {
-            console.log("In Resolver");
-            console.log(context.req.user);
-            return "";
-        }
-    },
+const resolvers: Resolvers = {
 
     Mutation: {
         FacebookConnect: async (
