@@ -3,8 +3,10 @@ import { EmailSignUpMutationArgs } from 'src/types';
 import { EmailSignUpResponse } from '../../../types';
 import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
-import { transporter, mailOption } from '../../../utils/sendEmail';
+import sendEmail from '../../../utils/sendEmail';
 import Verification from '../../../entities/Verification';
+
+//이메일로 회원가입을 할 때 코드를 발급하고 인증하는 과정.
 
 const resolvers: Resolvers= {
     Mutation: {
@@ -32,17 +34,16 @@ const resolvers: Resolvers= {
                             payload: args.email,
                             target: "EMAIL"
                         });
-                        if(user.email){
-                            mailOption.to = user.email;
-                            mailOption.subject = "Please Verify this email.";
-                            mailOption.html = `<p>이 링크로 인증해주세요. 인증 코드는 ${emailVerification.key} 입니다.</p>`
-                        }
-                        await transporter.sendMail(mailOption,  (error,info): void => {
-                            if(error){ console.log(error); } else { console.log("Email is sent") }
-                            transporter.close();
-                        })
-                        const token1 = createJWT(user.id)
+                        await sendEmail(
+                            user.email,
+                            "Plz verify this email",
+                            `<p> 인증 코드는 ${emailVerification.key} 입니다.</p>`
+                            );
+                        
+                        //코드인증하고 맡에 토큰생성 및 emailVerification 저장해야함.
 
+                        const token1 = createJWT(user.id)
+                        emailVerification.save();
                         return {
                             ok: true,
                             error: null,

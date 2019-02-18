@@ -8,6 +8,7 @@ import {
 import User from "../../../entities/User";
 import createJWT from '../../../utils/createJWT';
 
+//이메일로 로그인을 할때 저장된 PW와 일치하는지 확인하는 과정.
 
 const resolvers: Resolvers = {
     Mutation: {

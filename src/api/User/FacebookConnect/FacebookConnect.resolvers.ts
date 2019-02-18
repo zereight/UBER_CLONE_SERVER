@@ -9,6 +9,7 @@ import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
 
 //email형식, fbid가 유효한지 체크하는 기능은 나중에 구현하자.
+//페이스북으로 회원가입하기 위한 과정.
 
 const resolvers: Resolvers = {
 

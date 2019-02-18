@@ -3,6 +3,9 @@ import { CompletePhoneVerificationMutationArgs, CompletePhoneVerificationRespons
 import Verification from '../../../entities/Verification';
 import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
+
+//StartPhoneVerification에서 인증해줬으면 key를 발급 받았을 것이고, 여기선 phoneVerification을 발급해주는 과정.
+
 const resolvers: Resolvers =  {
     Mutation: {
         CompletePhoneVerification: async (_,

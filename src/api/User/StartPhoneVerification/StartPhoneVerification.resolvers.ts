@@ -6,6 +6,8 @@ import {
     StartPhoneVerificationResponse
 } from '../../../types';
 
+// 새로 폰번호 인증을 요청할때의 과정
+
 const resolvers: Resolvers = {
     Mutation: {
         StartPhoneVerification: async ( //언제 시작될지 예측이 불가한 함수는 다 async처리하면 되겠군.
