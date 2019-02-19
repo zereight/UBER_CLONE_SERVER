@@ -44,20 +44,26 @@ type Ride {
   updatedAt: String
 }
 
-type CompletePhoneVerificationResponse {
+type CompleteEmailVerificationResponse {
   ok: Boolean!
   error: String
-  token: String
 }
 
 # DB에 요청이 아니라 DB의 어떤 정보를 변화시키는 거면 Mutation이다!
 type Mutation {
+  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
   FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!
   RequestEmailVerification: RequestEmailVerificationResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+}
+
+type CompletePhoneVerificationResponse {
+  ok: Boolean!
+  error: String
+  token: String
 }
 
 type EmailSignInResponse {

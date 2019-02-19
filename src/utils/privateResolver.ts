@@ -1,3 +1,4 @@
+/* context의 user가 있는지 체크하고 있으면 1번째 인수의 함수를 실행. */
 const privateResolver = resolverFunction => //curry방식을 이용. 그냥 x => y => x+y 랑 (x)(y) => x+y랑 비슷하다고 생각하면됨.
 async (parent, args, context, info) => {
 
