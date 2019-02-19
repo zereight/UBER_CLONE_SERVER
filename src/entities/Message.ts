@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, BaseEntity, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Chat from "./Chat"
 import User from './User';
 
@@ -6,7 +6,7 @@ import User from './User';
 @Entity()
 class Message extends BaseEntity{
 
-    @PrimaryColumn() id : number;
+    @PrimaryGeneratedColumn() id : number;
 
     @Column({type: "text"})
     text: string;

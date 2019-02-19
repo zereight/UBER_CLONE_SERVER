@@ -28,22 +28,25 @@ const resolvers: Resolvers= {
                         payload: args.phoneNumber,
                         verified: true
                     });
+                    
+                   
                     if (phoneVerification) {
                         const user = await User.create({...args}).save();
                         const emailVerification = await Verification.create({
                             payload: args.email,
                             target: "EMAIL"
                         });
+                        //코드인증하고 맡에 토큰생성 및 emailVerification 저장해야함.
+                        const token1 = await createJWT(user.id)
+                        await emailVerification.save();
                         await sendEmail(
                             user.email,
-                            "Plz verify this email",
+                            `${user.fullName} Plz verify this email`,
+                            "내용",
                             `<p> 인증 코드는 ${emailVerification.key} 입니다.</p>`
                             );
                         
-                        //코드인증하고 맡에 토큰생성 및 emailVerification 저장해야함.
-
-                        const token1 = createJWT(user.id)
-                        emailVerification.save();
+                        
                         return {
                             ok: true,
                             error: null,

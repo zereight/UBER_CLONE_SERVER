@@ -16,7 +16,7 @@ const resolvers: Resolvers = {
                 const user: User= context.req.user;
                 const {key} = args;
 
-                if(user.email){
+                if(user.email && !user.verifiedEmail){
                     try {
                         const verification  = await Verification.findOne({
                             payload: user.email,
@@ -25,7 +25,7 @@ const resolvers: Resolvers = {
 
                         if(verification){
                             user.verifiedEmail = true;
-                            user.save();
+                            await user.save();
                             return {
                                 ok: true,
                                 error: null

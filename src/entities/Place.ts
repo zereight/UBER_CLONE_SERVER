@@ -1,9 +1,9 @@
-import { Entity, BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, BaseEntity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class Place extends BaseEntity {
 
-    @PrimaryColumn() id : number;
+    @PrimaryGeneratedColumn() id : number;
 
     @Column({type: "text"})
     name: string;

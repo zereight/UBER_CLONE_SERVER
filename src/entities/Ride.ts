@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import User from './User';
 
 type STATUS = 
@@ -11,7 +11,7 @@ type STATUS =
 
 @Entity()
 class Ride extends BaseEntity{
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({type: "text", enum : ["ACCEPTED", "FINISHED" ,"CANCELED" ,"REQUESTING", "ONROUTE"]})

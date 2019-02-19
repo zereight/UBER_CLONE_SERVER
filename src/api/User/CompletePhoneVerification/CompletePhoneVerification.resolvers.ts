@@ -28,7 +28,7 @@ const resolvers: Resolvers =  {
                         };
                     } else {
                         verification.verified = true;
-                        verification.save();
+                        await verification.save();
                     }
 
                 } catch (error) {
@@ -43,18 +43,18 @@ const resolvers: Resolvers =  {
                 try {
                     const user = await User.findOne({phoneNumber});
 
-                    if(user) {
+                    if(user) { //유저가 존재하면 그 유저 토큰 반환
                         user.verifiedPhonenumber = true;
-                        user.save();
+                        await user.save();
 
-                        const token1 = createJWT(user.id)
+                        const token1 = await createJWT(user.id)
 
                         return {
                             ok:true,
                             error: null,
                             token: token1
                         }
-                    } else {
+                    } else { //유저가 존재하지 않으면 그냥 폰인증만 된채로 놔둠. EmailSignUp에서 유저 생성할거니 ㅇ
                         return {
                             ok: true,
                             error: null,

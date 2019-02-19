@@ -1,6 +1,6 @@
-import { Resolvers} from "src/resolvers";
+import { Resolvers} from '../../../resolvers';
 import Verification from '../../../entities/Verification';
-import { sendVerificationSMS } from '../../../utils/sendSMS';
+//import { sendVerificationSMS } from '../../../utils/sendSMS';
 import {
     StartPhoneVerificationMutationArgs,
     StartPhoneVerificationResponse
@@ -22,10 +22,11 @@ const resolvers: Resolvers = {
                     if( existingVerification ){
                         existingVerification.remove();
                     }
-
-                    const newVerification = await Verification.create({payload: phoneNumber, target: "PHONE"}).save();
-
-                    await sendVerificationSMS(newVerification.payload, newVerification.key);
+                    const newVerification = await Verification.create({payload: phoneNumber, target: "PHONE"});
+                    await newVerification.save();
+                    //twilio안쓰고 콘솔창에 키뜨게 하려고 주석처리 해둠.
+                    //await sendVerificationSMS(newVerification.payload, newVerification.key); 
+                    console.log("당신의 폰 키는 "+newVerification.key);
                     return {
                         ok: true,
                         error: null

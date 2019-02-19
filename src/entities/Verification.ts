@@ -1,4 +1,4 @@
-import { BaseEntity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert,  Entity } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 type verificationTarget = "PHONE" | "EMAIL"; //Verification에서만 쓸 사용자 정의 타입.
 
@@ -6,7 +6,7 @@ type verificationTarget = "PHONE" | "EMAIL"; //Verification에서만 쓸 사용�
 @Entity() // 이거 빠트렸었네 ;;
 class Verification extends BaseEntity{
 
-    @PrimaryColumn() id : number;
+    @PrimaryGeneratedColumn() id : number;
 
     @Column({type: "text", enum: ["PHONE", "EMAIL"]}) //target은 PHONE이랑 EMAIL밖에 없기때문에 따로 타입을 만들어줌.
     target: verificationTarget;
