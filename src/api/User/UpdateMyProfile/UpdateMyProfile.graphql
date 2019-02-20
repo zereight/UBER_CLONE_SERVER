@@ -1,0 +1,16 @@
+type UpdateMyProfileResponse {
+    ok: Boolean!
+    error: String
+}
+
+#업뎃하려는 속성이 일부일 수도 있으므로 필수해체임.
+type Mutation { 
+    UpdateMyProfile(
+        firstName: String,
+        lastName: String,
+        email: String,
+        password: String,
+        profilePhoto: String,
+        age: Int
+    ) : UpdateMyProfileResponse!
+}
