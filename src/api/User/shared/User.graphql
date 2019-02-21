@@ -19,6 +19,7 @@ type User {
     lastLat:Float
     lastOrientation:Float
     fbId: String
+    places: [Place]
     ridesAsPassenger: [Ride]
     ridesAsDriver: [Ride]
     createdAt: String!
