@@ -9,7 +9,7 @@ const resolvers: Resolvers = {
 
             try {
                 //null체크 해줄 필요없다. 왜냐하면 인수로 전달되는 것이 필수여야 하기 때문에.
-                await Place.create({ user, ...args}).save();
+                await Place.create({ user: user, ...args}).save();
                 return {
                     ok: true,
                     error: null
