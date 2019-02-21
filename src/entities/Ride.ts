@@ -45,7 +45,7 @@ class Ride extends BaseEntity{
     duration: string;
 
     @ManyToOne(type => User, user => user.ridesAsPassenger)
-    passenger : User;
+    passengers : User;
 
     @ManyToOne(type => User, user => user.ridesAsDriver)
     driver: User;

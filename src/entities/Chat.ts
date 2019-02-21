@@ -8,7 +8,7 @@ class Chat extends BaseEntity{
     @PrimaryGeneratedColumn() id:number;
 
     @OneToMany( type => Message, message => message.chat )
-    message: Message[];
+    messages: Message[];
 
     @OneToMany( type => User, user => user.chat )
     participants: User[];
