@@ -5,7 +5,7 @@ import User from '../../../entities/User';
 
 
 const resolvers: Resolvers = {
-    Mutaion: {
+    Mutation: {
         ReportMovement: privateResolver( 
             async (_, args: ReportMovementMutationArgs, {req}): Promise<ReportMovementResponse> => {
                 const user: User = req.user;

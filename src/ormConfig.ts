@@ -1,7 +1,7 @@
 import { ConnectionOptions } from "typeorm";
 
 const cO : ConnectionOptions = {
-    database: "uber_sever_db",
+    database: "kdh",
     synchronize: true, //서버가 시작할 때 마다 동기화 하겠다.
     logging: true,
     entities: ["entities/**/*.*"],
